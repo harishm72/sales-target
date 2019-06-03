@@ -7,9 +7,11 @@
     "firebase": "^6.1.0",
     "moment": "^2.24.0",
     "react": "^16.8.6",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "react-transition-group": "^4.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

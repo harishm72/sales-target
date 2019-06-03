@@ -1,6 +1,7 @@
 import React from "react";
 import Firebase from "./Firebase";
 import moment from "moment";
+import {Transition} from "react-transition-group";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -122,10 +123,10 @@ class App extends React.Component {
             variant="primary"
             type="button"
           >
-            Save
+            Set Target
           </Button>
         </Form>
-
+        <h4 style={{paddingTop: 48}}>Target Realtime Table</h4>
         <div className="data-grid">
           <div className="data-header">
             <p>Location ID</p>
@@ -134,46 +135,52 @@ class App extends React.Component {
             <p>Target Set</p>
             <p>Target Achieved</p>
           </div>
-          <div className="data-body">
-            {Object.values(this.state.data).map(entry => {
-              if (Array.isArray(entry)) {
-                return entry.map(row => {
-                  if (row) {
-                    return (
-                      <div
-                        key={`${row["Date"]}-${row["Location ID"]}`}
-                        className="data-row"
-                      >
-                        <p>{row["Location ID"]}</p>
-                        <p>{row["Location Name"]}</p>
-                        <p>{row["Date"]}</p>
-                        <p>{row["Target Set"]}</p>
-                        <p>{row["Target Acheived"]}</p>
-                      </div>
-                    );
-                  } else return;
-                });
-              } else {
-                return Object.values(entry).map(row => {
-                  if (row) {
-                    return (
-                      <div
-                        key={row["Date"] - row["Location ID"]}
-                        id={row["Date"] - row["Location ID"]}
-                        className="data-row"
-                      >
-                        <p>{row["Location ID"]}</p>
-                        <p>{row["Location Name"]}</p>
-                        <p>{row["Date"]}</p>
-                        <p>{row["Target Set"]}</p>
-                        <p>{row["Target Acheived"]}</p>
-                      </div>
-                    );
-                  } else return;
-                });
-              }
-            })}
-          </div>
+          <Transition
+            transitionName="example"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}
+          >
+            <div className="data-body">
+              {Object.values(this.state.data).map(entry => {
+                if (Array.isArray(entry)) {
+                  return entry.map(row => {
+                    if (row) {
+                      return (
+                        <div
+                          key={`${row["Date"]}-${row["Location ID"]}`}
+                          className="data-row"
+                        >
+                          <p>{row["Location ID"]}</p>
+                          <p>{row["Location Name"]}</p>
+                          <p>{row["Date"]}</p>
+                          <p>{row["Target Set"]}</p>
+                          <p>{row["Target Acheived"]}</p>
+                        </div>
+                      );
+                    } else return;
+                  });
+                } else {
+                  return Object.values(entry).map(row => {
+                    if (row) {
+                      return (
+                        <div
+                          key={row["Date"] - row["Location ID"]}
+                          id={row["Date"] - row["Location ID"]}
+                          className="data-row"
+                        >
+                          <p>{row["Location ID"]}</p>
+                          <p>{row["Location Name"]}</p>
+                          <p>{row["Date"]}</p>
+                          <p>{row["Target Set"]}</p>
+                          <p>{row["Target Acheived"]}</p>
+                        </div>
+                      );
+                    } else return;
+                  });
+                }
+              })}
+            </div>
+          </Transition>
         </div>
       </div>
     );
